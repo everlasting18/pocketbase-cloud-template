@@ -6,7 +6,8 @@
 import type { PbCollectionDefinition } from "@/types";
 
 /**
- * Collection Definitions Matrix for UI mapping view
+ * Human-readable view of src/setup/collections.json for the Settings page.
+ * Keep in sync when the JSON changes.
  */
 export const POCKETBASE_COLLECTIONS_MAPPING: PbCollectionDefinition[] = [
   {
@@ -17,9 +18,9 @@ export const POCKETBASE_COLLECTIONS_MAPPING: PbCollectionDefinition[] = [
     rules: {
       list: 'Public ("")',
       view: 'Public ("")',
-      create: 'Public for seed / Auth (@request.auth.id != "")',
-      update: 'Auth (@request.auth.id != "")',
-      delete: 'Auth (@request.auth.id != "")',
+      create: "Superusers only (null)",
+      update: "Superusers only (null)",
+      delete: "Superusers only (null)",
     },
     fields: [
       {
@@ -123,9 +124,9 @@ export const POCKETBASE_COLLECTIONS_MAPPING: PbCollectionDefinition[] = [
     rules: {
       list: 'Public ("")',
       view: 'Public ("")',
-      create: 'Public for seed / Auth (@request.auth.id != "")',
-      update: 'Auth (@request.auth.id != "")',
-      delete: 'Auth (@request.auth.id != "")',
+      create: "Superusers only (null)",
+      update: "Superusers only (null)",
+      delete: "Superusers only (null)",
     },
     fields: [
       {
@@ -185,11 +186,11 @@ export const POCKETBASE_COLLECTIONS_MAPPING: PbCollectionDefinition[] = [
     description:
       "Customer checkout orders with purchased line items and shipping details.",
     rules: {
-      list: 'Auth (@request.auth.id != "")',
-      view: 'Auth (@request.auth.id != "")',
+      list: "Superusers only (null)",
+      view: "Superusers only (null)",
       create: 'Public ("")',
-      update: 'Auth (@request.auth.id != "")',
-      delete: 'Auth (@request.auth.id != "")',
+      update: "Superusers only (null)",
+      delete: "Superusers only (null)",
     },
     fields: [
       {
