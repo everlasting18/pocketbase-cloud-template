@@ -26,7 +26,7 @@ A deploy ships `pb_hooks` and `pb_migrations`; new migrations apply on the resta
 | `pb_migrations/` | Schema migrations, applied on start. `*_aura_collections.js` are generated from `FE-pocketbase/src/setup/collections.json` by `bun run sync:schema` — never edit them. |
 | `pb_hooks/` | JavaScript hooks (`*.pb.js`). Runs in goja, not Node. |
 | `pb_data/` | Database and uploads. Git-ignored. |
-| `pbc.json` | Pinned PocketBase version and build dirs. `pbc` adds project ids on first deploy. |
+| `pbc.json` | Your local `pbc` link (project and instance ids). Git-ignored; `pbc` writes it on first deploy. `pbc.json.example` shows the shape. |
 
 ## Collections
 

@@ -9,3 +9,5 @@ dist-ssr/
 BE-pocketbase/pocketbase
 BE-pocketbase/pocketbase.exe
 BE-pocketbase/pb_data/
+
+pbc.json

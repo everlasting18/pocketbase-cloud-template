@@ -1,0 +1,15 @@
+{
+  "build": {
+    "command": "bun run build",
+    "outputDir": "dist"
+  },
+  "projectId": "random-2321312",
+  "kind": "frontends",
+  "defaultEnvironment": "production",
+  "environments": {
+    "production": {
+      "id": "random-2232131",
+      "name": "fe-pocketbase"
+    }
+  }
+}
