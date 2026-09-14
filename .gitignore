@@ -1,0 +1,11 @@
+.DS_Store
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env.local
+
+# PocketBase binary and data (install per machine with `pbc local init`)
+BE-pocketbase/pocketbase
+BE-pocketbase/pocketbase.exe
+BE-pocketbase/pb_data/

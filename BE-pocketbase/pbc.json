@@ -1,0 +1,7 @@
+{
+  "pocketbaseVersion": "0.40.3",
+  "build": {
+    "pbHooks": "pb_hooks",
+    "pbMigrations": "pb_migrations"
+  }
+}

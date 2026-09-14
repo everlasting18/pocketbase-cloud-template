@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Aura Quiet Living</title>
+    <meta name="description" content="A serene e-commerce experience with PocketBase Cloud collection mapping." />
+    <meta property="og:title" content=" Aura Quiet Living" />
+    <meta property="og:description" content="A serene e-commerce experience with PocketBaseCloud collection mapping." />
+    <script>
+      /* Defensive shim for environments (such as sandboxed iframes) where window.fetch
+         or Window.prototype.fetch is defined with only a getter and no setter. */
+      (function() {
+        try {
+          var targets = [
+            typeof window !== 'undefined' ? window : null,
+            typeof globalThis !== 'undefined' ? globalThis : null,
+            typeof Window !== 'undefined' && Window.prototype ? Window.prototype : null
+          ];
+          for (var i = 0; i < targets.length; i++) {
+            var target = targets[i];
+            if (!target) continue;
+            try {
+              var currentFetch = target.fetch || (typeof window !== 'undefined' ? window.fetch : null);
+              var _fetch = typeof currentFetch === 'function' ? currentFetch.bind(target) : currentFetch;
+              var desc = Object.getOwnPropertyDescriptor(target, 'fetch');
+              if (!desc || (desc.get && !desc.set) || desc.writable === false) {
+                Object.defineProperty(target, 'fetch', {
+                  configurable: true,
+                  enumerable: true,
+                  get: function() { return _fetch; },
+                  set: function(val) { _fetch = val; }
+                });
+              }
+            } catch (inner) {}
+          }
+        } catch (e) {
+          console.warn('Fetch setter initialization notice:', e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
