@@ -9,10 +9,6 @@ import type { JournalArticle, Order, OrderStatus, Product } from "@/types";
 
 const STORAGE_KEY = "aura_mock_pb_data";
 
-export const isMockPocketBaseEnabled =
-  Boolean((import.meta as any).env?.DEV) &&
-  (import.meta as any).env?.VITE_USE_MOCK_POCKETBASE === "true";
-
 interface StoredProduct extends Product {
   created: string;
 }

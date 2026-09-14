@@ -17,7 +17,6 @@ import {
   deleteMockProduct,
   getMockArticle,
   getMockProduct,
-  isMockPocketBaseEnabled,
   listMockArticles,
   listMockOrders,
   listMockProducts,
@@ -25,6 +24,7 @@ import {
   updateMockOrderStatus,
   updateMockProduct,
 } from "./mock";
+import { isMockMode } from "./dataSource";
 
 export interface Page<T> {
   items: T[];
@@ -129,19 +129,19 @@ const withProductUploads = (input: ProductInput, update = false): Record<string,
 // Products
 
 export const listProducts = ({ page, perPage = PER_PAGE, search }: ListParams) =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? Promise.resolve(listMockProducts(page, perPage, search))
     : listPage("products", page, perPage, searchFilter("name", search), mapPbRecordToProduct);
 
 export const getProduct = async (id: string): Promise<Product> =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? getMockProduct(id)
     : mapPbRecordToProduct(
         await getPocketBase().collection("products").getOne(id, { requestKey: null }),
       );
 
 export const createProduct = async (input: ProductInput): Promise<Product> =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? createMockProduct(input)
     : mapPbRecordToProduct(
         await getPocketBase().collection("products").create(withProductUploads(input)),
@@ -151,14 +151,14 @@ export const updateProduct = async (
   id: string,
   input: ProductInput,
 ): Promise<Product> =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? updateMockProduct(id, input)
     : mapPbRecordToProduct(
         await getPocketBase().collection("products").update(id, withProductUploads(input, true)),
       );
 
 export const deleteProduct = async (id: string): Promise<void> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     deleteMockProduct(id);
     return;
   }
@@ -168,7 +168,7 @@ export const deleteProduct = async (id: string): Promise<void> => {
 // Journal articles
 
 export const listArticles = ({ page, perPage = PER_PAGE, search }: ListParams) =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? Promise.resolve(listMockArticles(page, perPage, search))
     : listPage(
         "journal_articles",
@@ -179,7 +179,7 @@ export const listArticles = ({ page, perPage = PER_PAGE, search }: ListParams) =
       );
 
 export const getArticle = async (id: string): Promise<JournalArticle> =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? getMockArticle(id)
     : mapPbRecordToArticle(
         await getPocketBase()
@@ -188,7 +188,7 @@ export const getArticle = async (id: string): Promise<JournalArticle> =>
       );
 
 export const createArticle = async (input: ArticleInput): Promise<JournalArticle> =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? createMockArticle(input)
     : mapPbRecordToArticle(
         await getPocketBase()
@@ -200,7 +200,7 @@ export const updateArticle = async (
   id: string,
   input: ArticleInput,
 ): Promise<JournalArticle> =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? updateMockArticle(id, input)
     : mapPbRecordToArticle(
         await getPocketBase()
@@ -209,7 +209,7 @@ export const updateArticle = async (
       );
 
 export const deleteArticle = async (id: string): Promise<void> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     deleteMockArticle(id);
     return;
   }
@@ -227,7 +227,7 @@ export const listOrders = ({
   perPage?: number;
   status?: OrderStatus;
 }): Promise<Page<Order>> =>
-  isMockPocketBaseEnabled
+  isMockMode()
     ? Promise.resolve(listMockOrders(page, perPage, status))
     : listPage(
         "orders",
@@ -241,7 +241,7 @@ export const updateOrderStatus = async (
   id: string,
   status: OrderStatus,
 ): Promise<void> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     updateMockOrderStatus(id, status);
     return;
   }

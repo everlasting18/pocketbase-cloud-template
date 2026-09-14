@@ -11,9 +11,9 @@ import { mapPbRecordToArticle, mapPbRecordToProduct } from "./mappers";
 import {
   getMockArticles,
   getMockProducts,
-  isMockPocketBaseEnabled,
   saveMockOrder,
 } from "./mock";
+import { isMockMode } from "./dataSource";
 
 /**
  * Data Retrieval with local fallbacks
@@ -23,7 +23,7 @@ export const fetchProductsFromPocketBase = async (): Promise<{
   fromRemote: boolean;
   error?: string;
 }> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     return { products: getMockProducts(), fromRemote: true };
   }
 
@@ -62,7 +62,7 @@ export const fetchArticlesFromPocketBase = async (): Promise<{
   fromRemote: boolean;
   error?: string;
 }> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     return { articles: getMockArticles(), fromRemote: true };
   }
 
@@ -99,7 +99,7 @@ export const fetchArticlesFromPocketBase = async (): Promise<{
 export const saveOrderToPocketBase = async (
   order: Order,
 ): Promise<{ success: boolean; id?: string; error?: string }> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     return { success: true, id: saveMockOrder(order) };
   }
 

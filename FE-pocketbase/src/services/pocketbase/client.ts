@@ -4,7 +4,7 @@
  */
 
 import PocketBase, { BaseAuthStore, LocalAuthStore } from "pocketbase";
-import { isMockPocketBaseEnabled } from "./mock";
+import { type DataSource, isMockMode, persistDataSource } from "./dataSource";
 
 const STORAGE_KEY_URL = "aura_pb_url";
 const STORAGE_KEY_ADMIN_AUTH = "aura_admin_auth";
@@ -69,11 +69,11 @@ export const testPocketBaseConnection = async (testUrl?: string): Promise<{
   message?: string;
   data?: any;
 }> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     return {
       connected: true,
       code: 200,
-      message: "Development mock is active; no PocketBase server is being used.",
+      message: "Demo data is active; no PocketBase server is being used.",
     };
   }
 
@@ -115,4 +115,17 @@ export const testPocketBaseConnection = async (testUrl?: string): Promise<{
         "Unable to reach PocketBase server. Please verify URL.",
     };
   }
+};
+
+/**
+ * Switch this browser between demo data and a real PocketBase instance.
+ * Providers and the client singleton are built on page load, so a full
+ * reload is the reliable way to rebuild them. Sessions never carry over:
+ * mock tokens are meaningless to a server and vice versa.
+ */
+export const switchDataSource = (source: DataSource, url?: string): void => {
+  if (url) setPocketBaseUrl(url);
+  getPocketBase().authStore.clear();
+  persistDataSource(source);
+  window.location.assign("/admin/login");
 };

@@ -10,7 +10,7 @@ import AdminSidebar from "@/components/admin/AdminSidebar";
 import { Badge } from "@/components/ui/badge";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
-import { isMockPocketBaseEnabled } from "@/services/pocketbase";
+import { isMockMode } from "@/services/pocketbase";
 
 const AdminLayout: React.FC = () => {
   const { isAuthed } = useAdminAuth();
@@ -28,7 +28,7 @@ const AdminLayout: React.FC = () => {
           <SidebarTrigger className="-ml-1" />
           <Badge variant="outline" className="ml-auto gap-1.5 bg-background font-normal text-muted-foreground">
             <Database className="size-3" />
-            {isMockPocketBaseEnabled ? "Mock data" : "PocketBase"}
+            {isMockMode() ? "Mock data" : "PocketBase"}
           </Badge>
         </header>
         <main className="flex-1 bg-muted/20 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">

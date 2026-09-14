@@ -4,7 +4,7 @@
  */
 
 import { getPocketBase } from "./client";
-import { isMockPocketBaseEnabled } from "./mock";
+import { isMockMode } from "./dataSource";
 
 const MOCK_ADMIN_EMAIL = "admin@aura.test";
 const MOCK_ADMIN_PASSWORD = "secret123";
@@ -32,7 +32,7 @@ export const loginSuperuser = async (
   email: string,
   password: string,
 ): Promise<void> => {
-  if (isMockPocketBaseEnabled) {
+  if (isMockMode()) {
     if (email !== MOCK_ADMIN_EMAIL || password !== MOCK_ADMIN_PASSWORD) {
       throw new Error("Failed to authenticate.");
     }
@@ -53,7 +53,7 @@ export const loginSuperuser = async (
 export const refreshSuperuserSession = async (): Promise<boolean> => {
   const pb = getPocketBase();
   if (!isSuperuserSession()) return false;
-  if (isMockPocketBaseEnabled) return true;
+  if (isMockMode()) return true;
 
   try {
     await pb.collection("_superusers").authRefresh();

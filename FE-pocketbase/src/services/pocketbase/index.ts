@@ -4,6 +4,7 @@
  */
 
 export * from "./client";
+export * from "./dataSource";
 export * from "./mappers";
 export * from "./api";
 export * from "./auth";

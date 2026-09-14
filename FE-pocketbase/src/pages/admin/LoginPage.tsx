@@ -20,7 +20,7 @@ import {
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useAdminAuth } from "@/contexts/AdminAuthContext";
-import { isMockPocketBaseEnabled } from "@/services/pocketbase";
+import { isMockMode } from "@/services/pocketbase";
 
 const schema = z.object({
   email: z.email("Enter a valid email"),
@@ -62,8 +62,8 @@ const LoginPage: React.FC = () => {
         <CardHeader>
           <CardTitle>Aura Admin</CardTitle>
           <CardDescription>
-            {isMockPocketBaseEnabled
-              ? "Development mock — use admin@aura.test / secret123."
+            {isMockMode()
+              ? "Demo mode — sign in with admin@aura.test / secret123."
               : "Sign in with your PocketBase superuser account."}
           </CardDescription>
         </CardHeader>

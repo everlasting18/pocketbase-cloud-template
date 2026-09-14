@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router";
 import { toast } from "sonner";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -19,8 +20,9 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
   getCurrentPocketBaseUrl,
-  isMockPocketBaseEnabled,
+  isMockMode,
   setPocketBaseUrl,
+  switchDataSource,
   testPocketBaseConnection,
 } from "@/services/pocketbase";
 
@@ -65,15 +67,31 @@ const ConnectionCard: React.FC = () => {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        {isMockPocketBaseEnabled && (
+        {isMockMode() ? (
           <Alert>
             <CheckCircle2 />
-            <AlertTitle>Development mock active</AlertTitle>
+            <AlertTitle>Demo data active</AlertTitle>
             <AlertDescription>
-              Products, articles, and orders are stored only in this browser. No PocketBase
-              server is contacted.
+              <p>
+                Products, articles, and orders live only in this browser. No PocketBase server is
+                contacted.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button size="sm" asChild>
+                  <Link to="/admin/setup">Set up PocketBase</Link>
+                </Button>
+                <Button size="sm" variant="outline" onClick={() => switchDataSource("remote")}>
+                  Use PocketBase
+                </Button>
+              </div>
             </AlertDescription>
           </Alert>
+        ) : (
+          <div className="flex justify-end">
+            <Button size="sm" variant="outline" onClick={() => switchDataSource("mock")}>
+              Use demo data
+            </Button>
+          </div>
         )}
         <Field>
           <FieldLabel htmlFor="pb-url">Instance URL</FieldLabel>
