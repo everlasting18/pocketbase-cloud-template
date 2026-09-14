@@ -16,6 +16,7 @@ import OrdersPage from "@/pages/admin/OrdersPage";
 import ProductEditPage from "@/pages/admin/ProductEditPage";
 import ProductsPage from "@/pages/admin/ProductsPage";
 import SettingsPage from "@/pages/admin/SettingsPage";
+import SetupPage from "@/pages/admin/SetupPage";
 
 const AdminRoutes: React.FC = () => {
   const { isChecking } = useAdminAuth();
@@ -31,6 +32,7 @@ const AdminRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="login" element={<LoginPage />} />
+      <Route path="setup" element={<SetupPage />} />
       <Route element={<AdminLayout />}>
         <Route index element={<Navigate to="/admin/products" replace />} />
         <Route path="products" element={<ProductsPage />} />

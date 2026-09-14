@@ -6,7 +6,7 @@
 import React, { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
-import { Navigate, useSearchParams } from "react-router";
+import { Link, Navigate, useSearchParams } from "react-router";
 import { z } from "zod";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -115,6 +115,12 @@ const LoginPage: React.FC = () => {
               </Button>
             </FieldGroup>
           </form>
+          <p className="mt-4 text-center text-sm text-muted-foreground">
+            First time?{" "}
+            <Link to="/admin/setup" className="font-medium text-foreground underline-offset-4 hover:underline">
+              Set up PocketBase →
+            </Link>
+          </p>
         </CardContent>
       </Card>
     </div>

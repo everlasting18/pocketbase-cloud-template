@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { BookOpen, LogOut, Package, Settings2, ShoppingBag, Store } from "lucide-react";
+import { BookOpen, LogOut, Package, Rocket, Settings2, ShoppingBag, Store } from "lucide-react";
 import { Link, useLocation } from "react-router";
 import {
   Sidebar,
@@ -26,6 +26,7 @@ const NAV_ITEMS = [
   { to: "/admin/journal", label: "Journal", icon: BookOpen },
   { to: "/admin/orders", label: "Orders", icon: ShoppingBag },
   { to: "/admin/settings", label: "Settings", icon: Settings2 },
+  { to: "/admin/setup", label: "Setup", icon: Rocket },
 ];
 
 const AdminSidebar: React.FC = () => {
