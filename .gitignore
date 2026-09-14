@@ -1,13 +1,27 @@
+# OS / editors
 .DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.sw?
+
+# Dependencies, builds, logs
 node_modules/
 dist/
 dist-ssr/
+*.log
+package-lock.json
+
+# Local env and per-developer config
 *.local
 .env.local
+pbc.json
 
 # PocketBase binary and data (install per machine with `pbc local init`)
 BE-pocketbase/pocketbase
 BE-pocketbase/pocketbase.exe
 BE-pocketbase/pb_data/
 
-pbc.json
+# Local-only tooling
+pocketbase-skill-main/
