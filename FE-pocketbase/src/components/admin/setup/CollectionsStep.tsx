@@ -88,7 +88,7 @@ const CollectionsStep: React.FC<CollectionsStepProps> = ({ client, dashboardUrl,
       </FieldGroup>
       <p className="text-xs text-muted-foreground">
         Credentials go directly from your browser to your instance. Nothing is stored.
-        {" "}Find them with <code className="font-mono">pbc pocketbase info</code>.
+        {" "}Find them with <code className="font-mono">pbc pocketbase info &lt;name&gt;</code>.
       </p>
 
       <div className="flex flex-wrap gap-2">

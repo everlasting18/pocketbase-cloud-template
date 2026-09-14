@@ -1,67 +1,39 @@
-# PocketBase project
+# BE-PocketBase
 
-## Start
+PocketBase 0.40.3 backend for the template. See the root README for the full walkthrough.
 
-```sh
-./pocketbase serve
-```
-
-Then open the admin UI at <http://127.0.0.1:8090/_/>. On the very first run
-PocketBase prints a one-time link for creating the superuser account. The REST
-API is served from <http://127.0.0.1:8090/api/>.
-
-Useful flags:
+## Run locally
 
 ```sh
-./pocketbase serve --http 0.0.0.0:8090   # listen on all interfaces
-./pocketbase --help                      # every subcommand
+pbc local init 0.40.3                                   # binary is git-ignored; install per machine
+./pocketbase superuser upsert admin@example.com yourpassword
+./pocketbase serve                                      # dashboard http://127.0.0.1:8090/_/
 ```
 
-### Using npm scripts
-
-If this project already has a `package.json`, add a script so the usual
-`npm start` works — no extra package is needed, the binary is already here:
-
-```json
-{
-  "scripts": {
-    "start": "./pocketbase serve"
-  }
-}
-```
-
-Then:
+## Deploy
 
 ```sh
-npm start
+pbc pocketbase deploy --new be-pocketbase   # first deploy; later just `pbc pocketbase deploy`
+pbc pocketbase info be-pocketbase           # URLs and superuser credentials
 ```
+
+A deploy ships `pb_hooks` and `pb_migrations`; new migrations apply on the restart that follows.
 
 ## Layout
 
-| Path             | What it is                                              |
-| ---------------- | ------------------------------------------------------- |
-| `pocketbase`     | The server binary. Git-ignored — install it per machine. |
-| `pb_hooks/`      | JavaScript hooks, loaded on start. Edit `main.pb.js`.    |
-| `pb_migrations/` | Schema migrations, applied automatically on start.       |
-| `pb_data/`       | Database and uploads. Git-ignored.                       |
-| `pbc.json`        | Records the pinned PocketBase version.                   |
+| Path | What it is |
+| --- | --- |
+| `pb_migrations/` | Schema migrations, applied on start. `*_aura_collections.js` are generated from `FE-pocketbase/src/setup/collections.json` by `bun run sync:schema` — never edit them. |
+| `pb_hooks/` | JavaScript hooks (`*.pb.js`). Runs in goja, not Node. |
+| `pb_data/` | Database and uploads. Git-ignored. |
+| `pbc.json` | Pinned PocketBase version and build dirs. `pbc` adds project ids on first deploy. |
 
-## Managing the binary
+## Collections
 
-The binary and `pb_data/` are git-ignored, so a fresh clone needs the binary
-installed before it can start. Using the `pbc` CLI:
+| Collection | list / view | create | update / delete |
+| --- | --- | --- | --- |
+| `products` | public | superusers | superusers |
+| `journal_articles` | public | superusers | superusers |
+| `orders` | superusers | public (checkout) | superusers |
 
-```sh
-pbc init               # install the pinned version and scaffold
-pbc install <version>  # switch to a specific version
-pbc versions           # list available versions
-pbc which              # show the installed binary and its pin
-```
-
-Otherwise download it from <https://github.com/pocketbase/pocketbase/releases>
-and unzip it next to this file.
-
-## Docs
-
-- Hooks: <https://pocketbase.io/docs/js-overview/>
-- Migrations: <https://pocketbase.io/docs/js-migrations/>
+Docs: [hooks](https://pocketbase.io/docs/js-overview/) · [migrations](https://pocketbase.io/docs/js-migrations/)
