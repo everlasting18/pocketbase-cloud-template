@@ -3,6 +3,9 @@
 A storefront, an admin, and a PocketBase backend in one repository, ready to
 deploy to [PocketBase Cloud](https://pocketbasecloud.com) with the `pbc` CLI.
 
+**Demo:** https://ek9exa60p6agk8y.591p.pocketbasecloud.com — running on the
+bundled demo data, so you can click through it before deploying anything.
+
 ## Overview
 
 Aura is a small commerce site: a product catalogue with detail pages, a cart and
@@ -11,8 +14,9 @@ articles, and orders, with image uploads and a rich-text editor. `BE-pocketbase`
 is the database that backs all of it.
 
 The frontend runs on bundled demo data out of the box, so you can open it before
-any backend exists. A wizard at `/admin/setup` then points it at your own
-PocketBase instance, imports the collections, and seeds the sample catalogue.
+any backend exists — the demo above runs in exactly that mode. A wizard at
+`/admin/setup` then points it at your own PocketBase instance, imports the
+collections, and seeds the sample catalogue.
 
 ## Key features
 
@@ -46,11 +50,11 @@ pocketbase-cloud-template/
     ├── scripts/             # sync-schema and its tests
     └── src/
         ├── components/
-        │   ├── admin/       # forms, tables, setup steps
-        │   ├── cart/        # cart drawer
+        │   ├── admin/       # dashboard forms, tables, setup steps
+        │   ├── cart/        # cart sheet and line items
         │   ├── home/        # hero, about
-        │   ├── layout/      # navbar, footer
-        │   ├── product/     # card and grid
+        │   ├── layout/      # header, footer
+        │   ├── product/     # cards, gallery, detail
         │   └── ui/          # shadcn primitives
         ├── constants/       # demo products and articles
         ├── contexts/        # cart, catalog, admin auth
